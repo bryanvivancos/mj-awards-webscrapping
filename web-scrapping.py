@@ -24,6 +24,7 @@ respuesta = requests.get(url, headers=headers)
 # El código de respuesta <200> indicará que todo salió bien
 print(respuesta)
 
+#busca todas las tablas que hay en la página
 all_tables = pd.read_html(respuesta.content, encoding = 'utf8')
 
 print(f'Total de tablas encontradas: {len(all_tables)}')
