@@ -11,7 +11,6 @@ from io import StringIO
 #quitar espacios en numeros
 from unicodedata import normalize
 # Cargar o descargar archivos
-from google.colab import files
 
 
 # url de la página web a «escrapear»
@@ -73,7 +72,7 @@ grammys_mj = grammys_mj.astype(convert_dict)
 print(grammys_mj.dtypes)
 
 # Guarda Dataframe a archivo CSV
-grammys_mj.to_csv('premios_grammy_michael_jackson.csv')
+grammys_mj.to_csv('Output/premios_grammy_michael_jackson.csv')
 
 # Leamos el archivo para verificar su creacion
 pd.read_csv('premios_grammy_michael_jackson.csv').head(3)
