@@ -26,7 +26,6 @@ print(respuesta)
 
 #busca todas las tablas que hay en la página
 all_tables = pd.read_html(respuesta.content, encoding = 'utf8')
-
 print(f'Total de tablas encontradas: {len(all_tables)}')
 
 # StringIO Para evitar error: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version
