@@ -1,0 +1,23 @@
+resp = requests.get('https://es.wikipedia.org/wiki/Anexo:Premios_y_nominaciones_de_Michael_Jackson#Premios_Grammy',) # "get" request to read data without making a change
+resp = resp.text                       # fetch the HTML data
+soup = bs.BeautifulSoup(resp, 'lxml')  # convert to BeautifulSoup-type object to work with HTML efficiently
+                                       # lxml allows easy handling of HTML files/objects
+table = soup.find('table', {'class': 'wikitable'})  # 'wikitable sortable jquery-tablesorter' class does not appear
+                                                             # when navigating the website until the column is sorted,
+                                                             # so we should not use 'jquery-tablesorter'
+                                                            
+years = []
+songs = []
+categories = []
+results = []
+
+for row in tqdm(table.findAll('tr')[1: ]):
+    year = row.findAll('td')[0].text
+    song = row.findAll('td')[1].text
+    category = row.findAll('td')[2].text
+    result = row.findAll('td')[3].text
+    
+df = pd.DataFrame(list(zip(years, songs, categories, results)), columns =['Año', 'Artista/Canción', 'Categoría', 'Resultado'])
+df = df.reset_index(drop=True)
+
+df.to_csv('Output/mj-grammy-awards', index=False)
